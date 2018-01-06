@@ -24,4 +24,11 @@ describe('promise-duck | thenable', () => {
         _ => done()
     )
   })
+
+  it('can be used with await keyword', async () => {
+    const p = thenable(fn)
+    const value = await p
+
+    expect(value).to.equal('foo')
+  })
 })
