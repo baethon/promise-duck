@@ -1,5 +1,27 @@
-// const { thenable } = require('../')
+const { expect } = require('chai')
+const { thenable } = require('../')
+
+const fn = () => 'foo'
+const failingFn = () => {
+  throw new Error(':o')
+}
 
 describe('promise-duck | thenable', () => {
-  it('works', () => {})
+  it('converts fn to thenable object', (done) => {
+    const p = thenable(fn)
+
+    p.then(value => {
+      expect(value).to.equal('foo')
+      done()
+    })
+  })
+
+  it('marks promise as rejected for failing fn', (done) => {
+    const p = thenable(failingFn)
+
+    p.then(
+        _ => done(new Error('promise should not resolve')),
+        _ => done()
+    )
+  })
 })
