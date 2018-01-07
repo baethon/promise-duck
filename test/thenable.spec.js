@@ -6,6 +6,18 @@ const failingFn = () => {
   throw new Error(':o')
 }
 
+const asyncFn = fn => () => new Promise((resolve, reject) => {
+  const wrapper = () => {
+    try {
+      resolve(fn())
+    } catch (error) {
+      reject(error)
+    }
+  }
+
+  setTimeout(wrapper, 0)
+})
+
 describe('promise-duck | thenable', () => {
   it('converts fn to thenable object', (done) => {
     const p = thenable(fn)
@@ -64,6 +76,22 @@ describe('promise-duck | thenable', () => {
       }
 
       expect(secondError).to.be.equal(error)
+    })
+  })
+
+  describe('async', () => {
+    it('resolves value', async () => {
+      const p = thenable(asyncFn(fn))
+      expect(await p).to.equal('foo')
+    })
+
+    it('rejects on error', (done) => {
+      const p = thenable(asyncFn(failingFn))
+
+      p.then(
+        _ => done('promise should not resolve'),
+        _ => done()
+      )
     })
   })
 })
