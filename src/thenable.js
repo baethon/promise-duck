@@ -1,6 +1,6 @@
 const wrapper = require('./wrapper')
 
-module.exports = (fn, { memoize = true } = {}) => {
+const thenable = (fn, { memoize = true } = {}) => {
   const wrappedFn = memoize ? wrapper.memoize(fn) : wrapper.promiseable(fn)
 
   return {
@@ -10,3 +10,12 @@ module.exports = (fn, { memoize = true } = {}) => {
     }
   }
 }
+
+thenable.assign = (...args) => {
+  const fn = args.pop()
+  args.push(thenable(fn))
+
+  return Object.assign(...args)
+}
+
+module.exports = thenable
