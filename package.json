@@ -27,5 +27,9 @@
       "before",
       "after"
     ]
-  }
+  },
+  "files": [
+    "index.js",
+    "src/**/*.js"
+  ]
 }
