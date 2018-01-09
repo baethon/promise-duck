@@ -94,30 +94,4 @@ describe('promise-duck | thenable', () => {
       )
     })
   })
-
-  describe('assign', () => {
-    it('mutates given object', async () => {
-      const obj = {
-        name: 'Jon',
-        hello () {
-          return `Hai ${this.name}`
-        }
-      }
-
-      thenable.assign(obj, obj.hello.bind(obj))
-
-      expect(await obj).to.equal('Hai Jon')
-    })
-
-    it('allows to pass multiple objects', async () => {
-      const obj = { name: 'Jon' }
-      const result = thenable.assign({}, obj, function () {
-        return `Hai ${obj.name}`
-      })
-
-      expect(result).not.to.equal(obj)
-      expect(result).has.property('name', 'Jon')
-      expect(await result).to.equal('Hai Jon')
-    })
-  })
 })
