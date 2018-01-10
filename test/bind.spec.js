@@ -25,4 +25,15 @@ describe('promise-duck | bind', () => {
 
     expect(await object).not.to.equal(await object)
   })
+
+  it('returns extended object', () => {
+    const object = { name: 'Jon' }
+    const hello = function () {
+      return `Hai ${this.name} ${Math.random()}`
+    }
+
+    const result = bind(hello, { memoize: false }).to(object)
+
+    expect(result).to.equal(object)
+  })
 })

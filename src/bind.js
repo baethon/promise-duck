@@ -16,7 +16,8 @@ module.exports = (fn, options = {}) => ({
    * @param  {Object} object
    * @return {Object}
    */
-  to: (object) => {
-    Object.assign(object, thenable(fn.bind(object), options))
-  }
+  to: (object) => Object.assign(
+    object,
+    thenable(fn.bind(object), options)
+  )
 })

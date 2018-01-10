@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 
 * invalid link in CHANGELOG for v1.0.0
+* `bind()` was not returning extended object
 
 ## [1.0.0] - 2018-01-09
 ### Added
