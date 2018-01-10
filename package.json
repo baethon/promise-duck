@@ -1,6 +1,6 @@
 {
   "name": "@baethon/promise-duck",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Converts object to be promise-like",
   "main": "index.js",
   "author": "Radoslaw Mejer <radmen@radmen.info>",
